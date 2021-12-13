@@ -1,0 +1,158 @@
+<template>
+  <div class="project-section py-4 container">
+    <div class="row justify-content-end">
+        <div v-for="project in projects"
+                    :key="project.id"
+                    :id="`project-${project.id}`"
+                    class="col-lg-3 col-md-6 col-12 mb-4 project"
+                    data-toggle="modal" 
+                    :data-target="`#ModalProject${project.id}`"
+                    v-on:click="showProject(project)">
+            <img :src="project.img" :alt="`${project.name} - ${project.subtitle}`" class="project-thumbnail">
+            <div>
+                <h2 class="project-name mt-4">{{project.name}}</h2>
+                <p class="project-subtitle mt-2">{{project.subtitle}}</p>
+            </div>
+        </div> 
+
+        <div ref="customPopup" :class="{'d-block': dblock, 'd-none' : dnone, 'popup-bg': 'popup-bg'}">
+           <ProjectPopup :project="selectedProject" />
+        </div>
+
+    </div>
+  </div>
+</template>
+
+<script>
+import ProjectPopup from './ProjectPopup.vue'
+
+export default {
+  name: 'Project Section',
+  components: {
+      ProjectPopup
+  },
+  data() {
+      return {
+          projects : [
+            {
+                "id" : "1",
+                "name" : "Project 1",
+                "subtitle" : "Subtitle 1 - Something something whatever",
+                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
+                "img": [
+                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png",
+                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png",
+                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png",
+                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"
+                ]
+            },
+            {
+                "id" : "2",
+                "name" : "Project 2",
+                "subtitle" : "Subtitle 1 - Something something whatever",
+                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
+                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
+
+            },
+            {
+                "id" : "3",
+                "name" : "Project 2",
+                "subtitle" : "Subtitle 1 - Something something whatever",
+                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
+                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
+
+            },
+            {
+                "id" : "4",
+                "name" : "Project 2",
+                "subtitle" : "Subtitle 1 - Something something whatever",
+                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
+                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
+
+            },
+            {
+                "id" : "5",
+                "name" : "Project 2",
+                "subtitle" : "Subtitle 1 - Something something whatever",
+                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
+                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
+
+            }
+          ],
+          selectedProject: "",
+          dblock: false,
+          dnone: true
+      }
+  },
+  methods: {
+    showProject(project) {
+        this.dblock = true
+        this.dnone = false
+        this.selectedProject = project
+        console.log(this.selectedProject)
+    },
+    closePopup(){
+          this.dblock = false
+        this.dnone = true
+        console.log("wrh")
+        console.log(this.isActive)
+    }
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Roboto:wght@300&display=swap');
+.project { 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+
+    &:hover {
+        .project-thumbnail {
+            opacity: 1;
+        }
+    }
+}
+
+.project-name {
+    font-size: 18px;
+}
+
+.project-subtitle {
+    font-size: 12px;
+}
+
+.project-thumbnail {
+    width: 170px;
+    height: 400px;
+    object-fit: cover;
+    opacity: 0.3;
+    transition: 0.7s;
+    cursor: pointer;
+
+    @media (max-width: 900px) {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.popup-bg {
+    background: #191919bf
+}
+
+.custom-popup {
+    position: fixed;
+    top: 40px;
+    bottom: 40px;
+    left: 24px;
+    right: 24px;
+    background-color: var(--bg-color);
+}
+
+.popup-head-closing-button {
+    cursor: pointer;
+}
+</style>
