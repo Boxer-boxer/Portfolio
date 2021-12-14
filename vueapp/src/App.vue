@@ -1,8 +1,9 @@
 <template>
   <div class="main" :style="cssVars">
 
-    <EntrySection/>
-    <ProjectSection/>
+    <EntrySection :background="entrySectionBackground" />
+    <ProjectSection />
+    <ContactSection />
   </div>
 </template>
 
@@ -10,12 +11,14 @@
   import axios from 'axios'
   import EntrySection from './components/EntrySection.vue'
   import ProjectSection from './components/ProjectSection.vue'
+  import ContactSection from './components/ContactSection.vue'
 
-  export default {
+export default {
     name: 'App',
     components: {
       EntrySection,
-      ProjectSection
+      ProjectSection,
+      ContactSection
     },
     data() {
       return {
@@ -30,7 +33,6 @@
         const api_url = new URL(location.href).href
         await axios.get(`${api_url}api/settings`).then(response => {
           this.data = response.data[0]
-          console.log(this.data)
         })
       }
     },
@@ -40,14 +42,19 @@
           '--bg-color': this.data.color,
           '--font-color': this.data.font_color
         }
-    }
+      },
+      entrySectionBackground(){
+        return {
+          "image" : this.data.entry_section_background
+        }
+      }
     }
   }
 </script>
 
 <style>
 #app {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-family: Open Sans, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -56,7 +63,6 @@
 .main {
   background-color: var(--bg-color);
   color: var(--font-color);
-  padding: 16px;
 }
 
 .text-left {
@@ -64,14 +70,34 @@
 }
 
 h1 {
-  font-family: 'Italiana', serif;
+  font-family: 'Work Sans', serif;
 }
 
 p {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 [class^=material-] {
   font-size:14px;
+}
+
+.sr-only {
+  display: none;
+}
+
+.hide-letters {
+  /* width: 0!important; */
+  opacity: 0 !important;
+  /* display: none; */
+  transition: 0.5s;
+  font-size: 0;
+}
+
+.show-letters {
+  /* display: inline-block!important; */
+  opacity: 1!important;
+  font-size: 1em;
+  /* width: auto!important; */
+  transition: 0.5s;
 }
 </style>

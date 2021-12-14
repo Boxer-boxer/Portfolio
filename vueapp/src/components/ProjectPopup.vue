@@ -1,29 +1,26 @@
 <template>
-    <div class="custom-popup d-flex flex-column">
-        <div class="popup-head d-flex justify-content-end p-4">
-            <div class="popup-head-closing-button" v-on:click="closePopup">x</div>
-        </div>
-        <div class="popup-body container h-100">
+    <div class="h-100">
+        <div class="popup-body container">
             <div class="row h-100">
-                <div class="col-12 col-lg-4 d-flex justify-content-end flex-column text-left align-items-end">
-                    <h2>{{project.title}}</h2>
-                    <h4>{{project.subtitle}}</h4>
-                    <p>{{project.description}}</p>
+                <div class="col-12 px-0 col-md-4 pr-4 d-flex justify-content-end flex-column text-left align-items-end">
+                    <h2>{{selectedProject.title}}</h2>
+                    <h4>{{selectedProject.subtitle}}</h4>
+                    <p>{{selectedProject.description}}</p>
                 </div>
-                <div class="col-12 col-lg-8 d-flex align-items-center justify-content-center">
-                    <slider animation="fade">
+                <div class="col-12 px-0 col-md-8 d-flex align-items-center justify-content-center">
+                    <slider animation="fade" class="popup-slider">
                         <slider-item
-                            v-for="(i, index) in project.img"
+                            v-for="(i, index) in selectedProject.img"
                             :key="index"
                             :style="i"
                         >
+                        <img :src="i" :alt="selectedProject.description" class="img-fluid">
                         </slider-item>
                     </slider>
-                    <!-- <img :src="" :alt="project.description" class="img-fluid"> -->
                 </div>
             </div>
         </div>
-        <div class="popup-footer p-4 d-flex justify-content-start">
+        <div class="popup-footer d-flex align-items-center justify-content-start">
             <span class="material-icons mr-2">email</span>
             <span class="material-icons">phone</span>
         </div>
@@ -34,25 +31,37 @@
 import { Slider, SliderItem } from 'vue-easy-slider'
 
 export default {
-  name: 'Project Pop-up',
-  components: [
+  name: 'ProjectPopUp',
+  components: {
     Slider,
     SliderItem,
-  ],
+  },
   props: {
-    project: {
+    selectedProject: {
         type: Object,
         default: function () {
-            return { project: '' }
+            return { }
         }
     }
   },
-  methods: {
-  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
+.popup-slider {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 300px;
+    max-width: 100%;
+}
+.slider-item {
+    height: auto!important;
+}
+.popup-footer {
+    height: 15%;
+}
+.popup-body {
+    height: 85%;
+}
 </style>

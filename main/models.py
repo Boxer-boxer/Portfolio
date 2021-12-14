@@ -1,10 +1,12 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from tinymce.models import HTMLField
 # Create your models here.
 
 class SiteSettings(models.Model):
     color = models.CharField(max_length=7)
     font_color = models.CharField(max_length=7)
+    entry_section_background = models.ImageField(upload_to="static/img", default="")
     
     def __str__(self):
         return "Site Settings"
@@ -13,3 +15,19 @@ class SiteSettings(models.Model):
         if not self.pk and SiteSettings.objects.exists():
             raise ValidationError('There is can be only one SiteSettings instance')
         return super(SiteSettings, self).save(*args, **kwargs)
+
+class ProjectImage(models.Model):
+    description = models.CharField(max_length=255)
+    # Project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='static/imgs/')
+    default = models.BooleanField(default=False)
+ 
+class Project(models.Model):
+    project_name = models.CharField(max_length=250)
+    project_subtitle = models.CharField(max_length=450)
+    project_description = HTMLField()
+    Images = models.ForeignKey(ProjectImage, on_delete=models.CASCADE, default="")
+    
+    def __str__(self):
+        return self.project_name
+    

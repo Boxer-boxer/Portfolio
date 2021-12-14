@@ -1,5 +1,5 @@
 <template>
-  <div class="project-section py-4 container">
+  <div class="project-section px-5 px-lg-3 py-4 container">
     <div class="row justify-content-end">
         <div v-for="project in projects"
                     :key="project.id"
@@ -8,7 +8,7 @@
                     data-toggle="modal" 
                     :data-target="`#ModalProject${project.id}`"
                     v-on:click="showProject(project)">
-            <img :src="project.img" :alt="`${project.name} - ${project.subtitle}`" class="project-thumbnail">
+            <img :src="project.img[0]" :alt="`${project.name} - ${project.subtitle}`" class="project-thumbnail">
             <div>
                 <h2 class="project-name mt-4">{{project.name}}</h2>
                 <p class="project-subtitle mt-2">{{project.subtitle}}</p>
@@ -16,7 +16,13 @@
         </div> 
 
         <div ref="customPopup" :class="{'d-block': dblock, 'd-none' : dnone, 'popup-bg': 'popup-bg'}">
-           <ProjectPopup :project="selectedProject" />
+            <div class="custom-popup d-flex flex-column container">
+                <div class="popup-head d-flex justify-content-end my-4">
+                    <div class="popup-head-closing-button" v-on:click="closePopup">x</div>
+                </div>
+               <ProjectPopup :selectedProject="selectedProject" />
+            </div>
+
         </div>
 
     </div>
@@ -27,7 +33,7 @@
 import ProjectPopup from './ProjectPopup.vue'
 
 export default {
-  name: 'Project Section',
+  name: 'ProjectSection',
   components: {
       ProjectPopup
   },
@@ -49,7 +55,7 @@ export default {
             {
                 "id" : "2",
                 "name" : "Project 2",
-                "subtitle" : "Subtitle 1 - Something something whatever",
+                "subtitle" : "Subtitle 2 - Something something whatever",
                 "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
                 "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
 
@@ -57,14 +63,14 @@ export default {
             {
                 "id" : "3",
                 "name" : "Project 2",
-                "subtitle" : "Subtitle 1 - Something something whatever",
+                "subtitle" : "Subtitle 3 - Something something whatever",
                 "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
                 "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
 
             },
             {
                 "id" : "4",
-                "name" : "Project 2",
+                "name" : "Project 4",
                 "subtitle" : "Subtitle 1 - Something something whatever",
                 "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
                 "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
@@ -72,14 +78,14 @@ export default {
             },
             {
                 "id" : "5",
-                "name" : "Project 2",
+                "name" : "Project 6",
                 "subtitle" : "Subtitle 1 - Something something whatever",
                 "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
                 "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
 
             }
           ],
-          selectedProject: "",
+          selectedProject: {},
           dblock: false,
           dnone: true
       }
@@ -89,13 +95,13 @@ export default {
         this.dblock = true
         this.dnone = false
         this.selectedProject = project
-        console.log(this.selectedProject)
+        console.log(this.selectedProject.id)
     },
     closePopup(){
           this.dblock = false
         this.dnone = true
         console.log("wrh")
-        console.log(this.isActive)
+        console.log(this.selectedProject.id)
     }
   }
 }
@@ -107,7 +113,7 @@ export default {
 .project { 
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     text-align: left;
 
     &:hover {
@@ -150,6 +156,11 @@ export default {
     left: 24px;
     right: 24px;
     background-color: var(--bg-color);
+    z-index: 1;
+    @media (max-width: 768px){
+        left: 0px;
+        right: 0px;
+    }
 }
 
 .popup-head-closing-button {
