@@ -4,11 +4,14 @@
       <div class="dark-overlay"></div>
       <div class="entry-content w-100 h-100 d-flex align-items-center justify-content-center">
           <h1 class="sr-only">Timothy Badiuk</h1>
-          <h1 class="entry-letters" id="EntryLetters">Timothy Badiuk</h1>
+          <h1 class="entry-letters" id="EntryLetters">
+            Timothy Badiuk
+          </h1>
           <div class="entry-footer">
             <a href="mailto:tjbadiuk@gmail.com" class="material-icons mr-2">email</a>
             <a href="tel:416-688-5411" class="material-icons">phone</a>
           </div>
+          
       </div>
     </div>
   </div>
@@ -31,7 +34,6 @@ export default {
     showLettersOnHover: function(elId) {
       $(elId).hover(
         function(){
-          console.log('hovering')
            $(this).children('.fade').addClass('show-letters')
         },
         function(){
@@ -133,6 +135,7 @@ export default {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 .sticky-initials {

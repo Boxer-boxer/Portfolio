@@ -98,6 +98,6 @@ p {
   opacity: 1!important;
   font-size: 1em;
   /* width: auto!important; */
-  transition: 0.5s;
+  transition: 0.5s; 
 }
 </style>

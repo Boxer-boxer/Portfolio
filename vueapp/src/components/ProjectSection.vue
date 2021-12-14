@@ -1,24 +1,26 @@
 <template>
-  <div class="project-section px-5 px-lg-3 py-4 container">
+  <div class="project-section px-5 px-lg-5 py-4 mx-0">
     <div class="row justify-content-end">
+        <div class="col-lg-2"></div>
         <div v-for="project in projects"
                     :key="project.id"
                     :id="`project-${project.id}`"
-                    class="col-lg-3 col-md-6 col-12 mb-4 project"
+                    class="col-lg-2 pl-lg-1 col-md-6 col-12 mb-4 project"
                     data-toggle="modal" 
                     :data-target="`#ModalProject${project.id}`"
                     v-on:click="showProject(project)">
             <img :src="project.img[0]" :alt="`${project.name} - ${project.subtitle}`" class="project-thumbnail">
-            <div>
+            <div class="w-100">
                 <h2 class="project-name mt-4">{{project.name}}</h2>
                 <p class="project-subtitle mt-2">{{project.subtitle}}</p>
             </div>
         </div> 
+        
 
         <div ref="customPopup" :class="{'d-block': dblock, 'd-none' : dnone, 'popup-bg': 'popup-bg'}">
             <div class="custom-popup d-flex flex-column container">
-                <div class="popup-head d-flex justify-content-end my-4">
-                    <div class="popup-head-closing-button" v-on:click="closePopup">x</div>
+                <div class="popup-head d-flex justify-content-end ">
+                    <div class="popup-head-closing-button py-2" v-on:click="closePopup">x</div>
                 </div>
                <ProjectPopup :selectedProject="selectedProject" />
             </div>
@@ -40,6 +42,18 @@ export default {
   data() {
       return {
           projects : [
+            {
+                "id" : "1",
+                "name" : "Project 1",
+                "subtitle" : "Subtitle 1 - Something something whatever",
+                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
+                "img": [
+                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png",
+                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png",
+                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png",
+                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"
+                ]
+            },
             {
                 "id" : "1",
                 "name" : "Project 1",
@@ -77,6 +91,54 @@ export default {
 
             },
             {
+                "id" : "5",
+                "name" : "Project 6",
+                "subtitle" : "Subtitle 1 - Something something whatever",
+                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
+                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
+
+            },
+                        {
+                "id" : "5",
+                "name" : "Project 6",
+                "subtitle" : "Subtitle 1 - Something something whatever",
+                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
+                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
+
+            },
+                        {
+                "id" : "5",
+                "name" : "Project 6",
+                "subtitle" : "Subtitle 1 - Something something whatever",
+                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
+                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
+
+            },
+                        {
+                "id" : "5",
+                "name" : "Project 6",
+                "subtitle" : "Subtitle 1 - Something something whatever",
+                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
+                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
+
+            }
+            ,            {
+                "id" : "5",
+                "name" : "Project 6",
+                "subtitle" : "Subtitle 1 - Something something whatever",
+                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
+                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
+
+            },
+                        {
+                "id" : "5",
+                "name" : "Project 6",
+                "subtitle" : "Subtitle 1 - Something something whatever",
+                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
+                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
+
+            },
+                        {
                 "id" : "5",
                 "name" : "Project 6",
                 "subtitle" : "Subtitle 1 - Something something whatever",
@@ -132,7 +194,7 @@ export default {
 }
 
 .project-thumbnail {
-    width: 170px;
+    width: 100%;
     height: 400px;
     object-fit: cover;
     opacity: 0.3;
@@ -151,7 +213,7 @@ export default {
 
 .custom-popup {
     position: fixed;
-    top: 40px;
+    top: 65px;
     bottom: 40px;
     left: 24px;
     right: 24px;
