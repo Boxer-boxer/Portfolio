@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 from main import routers as main_routers
@@ -26,7 +25,6 @@ urlpatterns = [
     path('', main_views.home),
     path('admin/', admin.site.urls),
     path('api/settings', main_views.site_settings),
-    # url(r'^projects/$', main_views.projects.as_view(), name='projects'),
     path('', include(main_routers.router.urls)),
     path('tinymce/', include('tinymce.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
