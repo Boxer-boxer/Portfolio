@@ -17,8 +17,6 @@
 <script>
 export default {
   name: 'EntrySection',
-  props: {
-  }
 }
 </script>
 

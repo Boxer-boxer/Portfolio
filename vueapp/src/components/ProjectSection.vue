@@ -9,10 +9,10 @@
                     data-toggle="modal" 
                     :data-target="`#ModalProject${project.id}`"
                     v-on:click="showProject(project)">
-            <img :src="project.img[0]" :alt="`${project.name} - ${project.subtitle}`" class="project-thumbnail">
+            <img :src="project.images[0].image" :alt="`${project.name} - ${project.subtitle}`" class="project-thumbnail">
             <div class="w-100">
-                <h2 class="project-name mt-4">{{project.name}}</h2>
-                <p class="project-subtitle mt-2">{{project.subtitle}}</p>
+                <h2 class="project-name mt-4">{{project.project_name}}</h2>
+                <p class="project-subtitle mt-2">{{project.project_subtitle}}</p>
             </div>
         </div> 
         
@@ -39,117 +39,19 @@ export default {
   components: {
       ProjectPopup
   },
+  props: {
+    projects: {
+        type: Array,
+        default: function () {
+          return [ ]
+      }
+    }
+  },
   data() {
       return {
-          projects : [
-            {
-                "id" : "1",
-                "name" : "Project 1",
-                "subtitle" : "Subtitle 1 - Something something whatever",
-                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
-                "img": [
-                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png",
-                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png",
-                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png",
-                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"
-                ]
-            },
-            {
-                "id" : "1",
-                "name" : "Project 1",
-                "subtitle" : "Subtitle 1 - Something something whatever",
-                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
-                "img": [
-                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png",
-                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png",
-                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png",
-                    "https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"
-                ]
-            },
-            {
-                "id" : "2",
-                "name" : "Project 2",
-                "subtitle" : "Subtitle 2 - Something something whatever",
-                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
-                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
-
-            },
-            {
-                "id" : "3",
-                "name" : "Project 2",
-                "subtitle" : "Subtitle 3 - Something something whatever",
-                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
-                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
-
-            },
-            {
-                "id" : "4",
-                "name" : "Project 4",
-                "subtitle" : "Subtitle 1 - Something something whatever",
-                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
-                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
-
-            },
-            {
-                "id" : "5",
-                "name" : "Project 6",
-                "subtitle" : "Subtitle 1 - Something something whatever",
-                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
-                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
-
-            },
-                        {
-                "id" : "5",
-                "name" : "Project 6",
-                "subtitle" : "Subtitle 1 - Something something whatever",
-                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
-                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
-
-            },
-                        {
-                "id" : "5",
-                "name" : "Project 6",
-                "subtitle" : "Subtitle 1 - Something something whatever",
-                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
-                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
-
-            },
-                        {
-                "id" : "5",
-                "name" : "Project 6",
-                "subtitle" : "Subtitle 1 - Something something whatever",
-                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
-                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
-
-            }
-            ,            {
-                "id" : "5",
-                "name" : "Project 6",
-                "subtitle" : "Subtitle 1 - Something something whatever",
-                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
-                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
-
-            },
-                        {
-                "id" : "5",
-                "name" : "Project 6",
-                "subtitle" : "Subtitle 1 - Something something whatever",
-                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
-                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
-
-            },
-                        {
-                "id" : "5",
-                "name" : "Project 6",
-                "subtitle" : "Subtitle 1 - Something something whatever",
-                "description": "blahj blah valsmkdasasj c asjdkas da jsk nvbsfjkv sdjkbf sdvjksd cfaj cj cfas",
-                "img": ["https://www.mydomaine.com/thmb/H_kdDUnp3OWKJZkIZ34sb_ZivHY=/1400x1004/filters:no_upscale():max_bytes(150000):strip_icc()/ScreenShot2019-09-11at9.11.50AM-ce5f668a225444bc8e38f7cea1d73c72.png"]
-
-            }
-          ],
-          selectedProject: {},
-          dblock: false,
-          dnone: true
+        selectedProject: {},
+        dblock: false,
+        dnone: true
       }
   },
   methods: {
@@ -157,13 +59,10 @@ export default {
         this.dblock = true
         this.dnone = false
         this.selectedProject = project
-        console.log(this.selectedProject.id)
     },
     closePopup(){
-          this.dblock = false
+        this.dblock = false
         this.dnone = true
-        console.log("wrh")
-        console.log(this.selectedProject.id)
     }
   }
 }

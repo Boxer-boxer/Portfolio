@@ -2,7 +2,7 @@
   <div class="main" :style="cssVars">
 
     <EntrySection :background="entrySectionBackground" />
-    <ProjectSection />
+    <ProjectSection :projects="projects" />
     <ContactSection />
   </div>
 </template>
@@ -23,16 +23,24 @@ export default {
     data() {
       return {
         data: "",
+        projects: []
       }
     },
     created() {
       this.getSiteSettings()
+      this.getProjects()
     },
     methods: {
       async getSiteSettings() {
         const api_url = new URL(location.href).href
         await axios.get(`${api_url}api/settings`).then(response => {
           this.data = response.data[0]
+        })
+      },
+      async getProjects() {
+        const api_url = new URL(location.href).href
+        await axios.get(`${api_url}api/projects`).then(response => {
+          this.projects = response.data
         })
       }
     },

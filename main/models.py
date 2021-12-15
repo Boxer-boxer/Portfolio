@@ -16,18 +16,16 @@ class SiteSettings(models.Model):
             raise ValidationError('There is can be only one SiteSettings instance')
         return super(SiteSettings, self).save(*args, **kwargs)
 
-class ProjectImage(models.Model):
-    description = models.CharField(max_length=255)
-    # Project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='static/imgs/')
-    default = models.BooleanField(default=False)
- 
 class Project(models.Model):
     project_name = models.CharField(max_length=250)
     project_subtitle = models.CharField(max_length=450)
     project_description = HTMLField()
-    Images = models.ForeignKey(ProjectImage, on_delete=models.CASCADE, default="")
     
     def __str__(self):
         return self.project_name
     
+class Image(models.Model):
+    name = models.CharField(max_length=255)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="project_image")
+    image = models.ImageField(upload_to='static/img/projects')
+    thumbnail = models.BooleanField(default=False)

@@ -2,21 +2,26 @@
     <div class="h-100">
         <div class="popup-body container">
             <div class="row h-100">
-                <div class="col-12 px-0 col-md-4 pr-4 d-flex justify-content-end flex-column text-left align-items-end">
-                    <h2>{{selectedProject.title}}</h2>
-                    <h4>{{selectedProject.subtitle}}</h4>
-                    <p>{{selectedProject.description}}</p>
+                <div class="col-12 px-0 position-relative col-md-4 pr-4 d-flex justify-content-end flex-column text-left align-items-end">
+                   
+                    <div class="text-description-container pr-4">
+                        <p class="text-right" v-html="selectedProject.project_description"></p>
+                    </div>
                 </div>
-                <div class="col-12 px-0 col-md-8 d-flex align-items-center justify-content-center">
+                <div class="col-12 px-0 position-relative col-md-8 d-flex align-items-center justify-content-center">
                     <slider animation="fade" class="popup-slider">
                         <slider-item
-                            v-for="(i, index) in selectedProject.img"
+                            v-for="(i, index) in selectedProject.images"
                             :key="index"
                             :style="i"
                         >
-                        <img :src="i" :alt="selectedProject.description" class="img-fluid">
+                            <img :src="i.image" :alt="i.name" class="img-fluid w-100">
                         </slider-item>
                     </slider>
+                    <div class="project-name">
+                         <h2>{{selectedProject.project_name}}</h2>
+                        <h4>{{selectedProject.project_subtitle}}</h4>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,8 +61,46 @@ export default {
     max-width: 100%;
 }
 .slider-item {
-    height: auto!important;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        height: 100%;
+        width: auto !important;
+        object-fit: cover;
+    }
 }
+
+.text-description-container {
+    max-height: 100%;
+    display: block;
+    position: absolute;
+    overflow-y: scroll;
+    padding-right: 10px;
+    &::-webkit-scrollbar {
+        width: 1px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background:var(--bg-color);
+
+    }
+    &::-webkit-scrollbar-track {
+        background: var(--font-color);
+    }
+
+}
+
+.project-name {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    z-index: 600;
+    opacity: 0.8;
+}
+
 .popup-footer {
     height: 15%;
 }
