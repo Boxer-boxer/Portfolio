@@ -2,13 +2,16 @@
     <div class="h-100">
         <div class="popup-body container">
             <div class="row h-100">
-                <div class="col-12 px-0 position-relative col-md-4 pr-4 d-flex justify-content-end flex-column text-left align-items-end">
-                   
+                <div class="col-12 px-0 position-relative col-md-4 pr-4 d-flex justify-content-end flex-column text-left align-items-end text-description-container-div">
                     <div class="text-description-container pr-4">
+                        <div class="project-name text-right position-relative d-block d-md-none">
+                            <h2>{{selectedProject.project_name}}</h2>
+                            <h4>{{selectedProject.project_subtitle}}</h4>
+                        </div>
                         <p class="text-right" v-html="selectedProject.project_description"></p>
                     </div>
                 </div>
-                <div class="col-12 px-0 position-relative col-md-8 d-flex align-items-center justify-content-center">
+                <div class="col-12 pt-4 pt-lg-0 px-0 position-relative col-md-8 d-flex align-items-center justify-content-center">
                     <slider animation="fade" class="popup-slider">
                         <slider-item
                             v-for="(i, index) in selectedProject.images"
@@ -18,7 +21,7 @@
                             <img :src="i.image" :alt="i.name" class="img-fluid w-100">
                         </slider-item>
                     </slider>
-                    <div class="project-name">
+                    <div class="project-name d-none d-md-block">
                          <h2>{{selectedProject.project_name}}</h2>
                         <h4>{{selectedProject.project_subtitle}}</h4>
                     </div>
@@ -59,6 +62,9 @@ export default {
     height: 100% !important;
     min-height: 300px;
     max-width: 100%;
+    @media (max-width: 992px) {
+        min-height: 150px;
+    }
 }
 .slider-item {
     bottom: 0;
@@ -84,6 +90,12 @@ export default {
     left: 0;
     right: 0;
 
+    &-div  {
+        @media (max-width: 768px){
+            height: 50%;
+        }
+    }
+
     &::-webkit-scrollbar {
         width: 1px;
     }
@@ -100,7 +112,7 @@ export default {
 
 .project-name {
     position: absolute;
-    right: 10px;
+    right: 16px;
     bottom: 10px;
     z-index: 600;
     opacity: 0.8;
