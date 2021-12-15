@@ -77,8 +77,13 @@ export default {
     max-height: 100%;
     display: block;
     position: absolute;
-    overflow-y: scroll;
-    padding-right: 10px;
+    overflow-y: auto;
+    padding: 10px;
+    font-size: 12px;
+    font-family: roboto;
+    left: 0;
+    right: 0;
+
     &::-webkit-scrollbar {
         width: 1px;
     }
