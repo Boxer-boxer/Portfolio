@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from tinymce.models import HTMLField
+from django.conf import settings
 # Create your models here.
 
 class SiteSettings(models.Model):
@@ -23,9 +24,14 @@ class Project(models.Model):
     
     def __str__(self):
         return self.project_name
+
+if settings.DEBUG == False:
+    upload_project_img_path = './../var/static_root/img/projects'
+else :
+    upload_project_img_path = 'static/img/projects'
     
 class Image(models.Model):
     name = models.CharField(max_length=255)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="project_image")
-    image = models.ImageField(upload_to='static/img/projects')
+    image = models.ImageField(upload_to=upload_project_img_path)
     thumbnail = models.BooleanField(default=False)
