@@ -25,10 +25,7 @@ class Project(models.Model):
     def __str__(self):
         return self.project_name
 
-if settings.DEBUG == False:
-    upload_project_img_path = './../var/static_root/img/projects'
-else :
-    upload_project_img_path = 'static/img/projects'
+upload_project_img_path = 'images/'
     
 class Image(models.Model):
     name = models.CharField(max_length=255)
