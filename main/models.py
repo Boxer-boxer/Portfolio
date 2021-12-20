@@ -4,10 +4,12 @@ from tinymce.models import HTMLField
 from django.conf import settings
 # Create your models here.
 
+upload_project_img_path = 'images/'
+
 class SiteSettings(models.Model):
     color = models.CharField(max_length=7)
     font_color = models.CharField(max_length=7)
-    entry_section_background = models.ImageField(upload_to="static/img", default="")
+    entry_section_background = models.ImageField(upload_to=upload_project_img_path, default="")
     
     def __str__(self):
         return "Site Settings"
@@ -24,8 +26,6 @@ class Project(models.Model):
     
     def __str__(self):
         return self.project_name
-
-upload_project_img_path = 'images/'
     
 class Image(models.Model):
     name = models.CharField(max_length=255)

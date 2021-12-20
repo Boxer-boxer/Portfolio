@@ -1,6 +1,6 @@
 <template>
   <div class="entry-section-parent">
-    <div class="entry-section container-fluid p-3 m-0 position-relative"  :style="{backgroundImage: 'url( /' + background.image + ')' }">
+    <div class="entry-section container-fluid p-3 m-0 position-relative"  :style="{backgroundImage: 'url( /media/' + background.image + ')'  }">
       <div class="dark-overlay"></div>
       <div class="entry-content w-100 h-100 d-flex align-items-center justify-content-center">
           <h1 class="sr-only">Timothy Badiuk</h1>
