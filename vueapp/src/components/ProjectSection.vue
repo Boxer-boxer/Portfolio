@@ -6,7 +6,7 @@
                     :key="project.id"
                     :id="`project-${project.id}`"
                     class="col-lg-2 pl-lg-1 col-md-6 col-12 mb-4 project"
-                    data-toggle="modal" 
+                    data-toggle="modal"
                     :data-target="`#ModalProject${project.id}`"
                     v-on:click="showProject(project)">
             <img :src="project.images[0].image" :alt="`${project.name} - ${project.subtitle}`" class="project-thumbnail">
@@ -14,8 +14,8 @@
                 <h2 class="project-name mt-4">{{project.project_name}}</h2>
                 <p class="project-subtitle mt-2">{{project.project_subtitle}}</p>
             </div>
-        </div> 
-        
+        </div>
+
 
         <div ref="customPopup" :class="{'d-block': dblock, 'd-none' : dnone, 'popup-bg': 'popup-bg'}">
             <div class="custom-popup d-flex flex-column container">
@@ -71,7 +71,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Italiana&family=Roboto:wght@300&display=swap');
-.project { 
+.project {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,10 +86,16 @@ export default {
 
 .project-name {
     font-size: 18px;
+    @media (max-width: 992px) {
+        font-size: 22px;
+    }
 }
 
 .project-subtitle {
     font-size: 12px;
+    @media (max-width: 992px) {
+        font-size: 16px;
+    }
 }
 
 .project-thumbnail {
@@ -100,7 +106,7 @@ export default {
     transition: 0.7s;
     cursor: pointer;
 
-    @media (max-width: 900px) {
+    @media (max-width: 992px) {
         width: 100%;
         height: auto;
     }
@@ -118,9 +124,10 @@ export default {
     right: 24px;
     background-color: var(--bg-color);
     z-index: 1;
-    @media (max-width: 768px){
+    @media (max-width: 992px){
         left: 0px;
         right: 0px;
+        padding: 10px
     }
 }
 

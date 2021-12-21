@@ -2,7 +2,7 @@
     <div class="h-100">
         <div class="popup-body container">
             <div class="row h-100">
-                <div class="col-12 px-0 position-relative col-md-4 pr-4 d-flex justify-content-end flex-column text-left align-items-end text-description-container-div">
+                <div class="col-12 px-0 position-relative col-lg-4 pr-4 d-flex justify-content-end flex-column text-left align-items-end text-description-container-div">
                     <div class="text-description-container pr-4">
                         <div class="project-name text-right position-relative d-block d-md-none">
                             <h2>{{selectedProject.project_name}}</h2>
@@ -11,7 +11,7 @@
                         <p class="text-right" v-html="selectedProject.project_description"></p>
                     </div>
                 </div>
-                <div class="col-12 pt-4 pt-lg-0 px-0 position-relative col-md-8 d-flex align-items-center justify-content-center">
+                <div class="col-12 pt-4 pt-lg-0 px-0 position-relative col-lg-8 d-flex align-items-center justify-content-center slider-div">
                     <slider animation="fade" class="popup-slider">
                         <slider-item
                             v-for="(i, index) in selectedProject.images"
@@ -28,11 +28,11 @@
                 </div>
             </div>
         </div>
-        <div class="popup-footer d-flex align-items-center justify-content-start">
+        <div class="d-none d-lg-flex popup-footer align-items-center justify-content-start">
             <span class="material-icons mr-2">email</span>
             <span class="material-icons">phone</span>
         </div>
-    </div> 
+    </div>
 </template>
 
 <script>
@@ -90,8 +90,12 @@ export default {
     left: 0;
     right: 0;
 
+    @media (max-width: 992px){
+        font-size: 20px;
+    }
+
     &-div  {
-        @media (max-width: 768px){
+        @media (max-width: 992px){
             height: 50%;
         }
     }
@@ -110,18 +114,31 @@ export default {
 
 }
 
+.slider-div {
+    height: 100%;
+    @media (max-width: 992px){
+        height: 50%;
+    }
+}
+
 .project-name {
     position: absolute;
     right: 16px;
-    bottom: 10px;
+    bottom: 45px;
     z-index: 600;
     opacity: 0.8;
 }
 
 .popup-footer {
     height: 15%;
+    @media (max-width: 992px) {
+        height: 0%;
+    }
 }
 .popup-body {
     height: 85%;
+    @media (max-width: 992px) {
+        height: 100%;
+    }
 }
 </style>

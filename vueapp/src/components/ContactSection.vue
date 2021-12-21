@@ -2,7 +2,7 @@
   <div class="entry-section px-5">
     <div class="text-left">
         <h1>Timothy Badiuk</h1>
-        <a href="mailto:tjbadiuk@gmail.com" class="contact-subtitle mb-2">
+        <a href="mailto:tjbadiuk@gmail.com" class="contact-subtitle my-4 mt-lg-0 mb-lg-2">
           <span class="material-icons mr-2">email</span>
           tjbadiuk@gmail.com
         </a>
@@ -41,6 +41,12 @@ export default {
   justify-content: flex-start;
   color: var(--color);
   text-decoration: none;
+  @media (max-width: 992px) {
+    font-size: 22px;
+    .material-icons {
+        font-size: 22px;
+    }
+  }
 }
 
 </style>

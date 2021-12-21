@@ -156,6 +156,9 @@ export default {
     font-size: 18px;
     color: var(--font-color);
     text-decoration: none;
+    @media (max-width: 992px) {
+        font-size: 40px;
+    }
   }
 }
 
