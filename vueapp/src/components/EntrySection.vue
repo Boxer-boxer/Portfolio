@@ -1,6 +1,6 @@
 <template>
   <div class="entry-section-parent">
-    <div class="entry-section container-fluid p-3 m-0 position-relative"  :style="{backgroundImage: 'url( /media/' + background.image + ')'  }">
+    <div class="entry-section container-fluid p-3 m-0 position-relative"  :style="{backgroundImage: 'url(/media/' + background.image + ')'  }">
       <div class="dark-overlay"></div>
       <div class="entry-content w-100 h-100 d-flex align-items-center justify-content-center">
           <h1 class="sr-only">Timothy Badiuk</h1>
@@ -11,7 +11,7 @@
             <a href="mailto:tjbadiuk@gmail.com" class="material-icons mr-2">email</a>
             <a href="tel:416-688-5411" class="material-icons">phone</a>
           </div>
-          
+
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@ export default {
       default: function () {
           return { }
       }
-    } 
+    }
   },
   methods: {
     showLettersOnHover: function(elId) {
@@ -44,7 +44,7 @@ export default {
     fadeInLetters: function(elId){
       var letters = $(elId).text().split("");
       $(elId).text("");
-  
+
       letters.forEach(function(item, index){
         if (index === 0) {
           let span = $("<span class='fade initials'>").text(item);
@@ -57,11 +57,11 @@ export default {
           $(elId).append(span);
         }
       });
-  
+
       $(document).find(".fade").each(function(){
         var delay = Math.random();
         var letter = $(this);
-        
+
         setTimeout(function(){
           letter.animate({"opacity":1},delay*500);
         },delay*2000);
@@ -172,7 +172,7 @@ export default {
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
-    
+
     // &:after {
     //     clip-path: polygon(100% 16%, 100% 15%, 0 50%, 0 51%);
     //     background: white;
@@ -182,7 +182,7 @@ export default {
     //     left: 0;
     //     right: 0;
     // }
-   
+
 }
 
 .entry-subtitle {
