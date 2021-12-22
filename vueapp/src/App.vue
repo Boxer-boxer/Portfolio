@@ -26,6 +26,13 @@ export default {
         projects: []
       }
     },
+    head: {
+      title: function() {
+        return {
+          inner: 'Timothy Badiuk - Architect'
+        }
+      }
+    },
     created() {
       this.getSiteSettings()
       this.getProjects()
