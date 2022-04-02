@@ -1,118 +1,169 @@
 <template>
   <div class="main" :style="cssVars">
+    <button class="menu-button" v-on:click="openMenu">menu</button>
 
-    <EntrySection :background="entrySectionBackground" />
-    <ProjectSection :projects="projects" />
-    <ContactSection />
+    <SideBar />
+    <EntrySection />
+    <ProjectSection :projects="this.projects" />
+    <div style="height: 100vh"></div>
   </div>
 </template>
 
 <script>
-  import axios from 'axios'
-  import EntrySection from './components/EntrySection.vue'
-  import ProjectSection from './components/ProjectSection.vue'
-  import ContactSection from './components/ContactSection.vue'
+import axios from "axios";
+import SideBar from "./components/SideBar.vue";
+import EntrySection from "./components/EntrySection.vue";
+import toggle from "./mixins/toggle";
+import $ from "jquery";
+import ProjectSection from "./components/ProjectSection.vue";
 
 export default {
-    name: 'App',
-    components: {
-      EntrySection,
-      ProjectSection,
-      ContactSection
-    },
-    data() {
+  name: "App",
+  mixins: [toggle],
+  components: {
+    SideBar,
+    EntrySection,
+    ProjectSection,
+  },
+  data() {
+    return {
+      data: "",
+      projects: [],
+    };
+  },
+  head: {
+    title: function () {
       return {
-        data: "",
-        projects: []
-      }
+        inner: "Jorge da Silva - Web Developer",
+      };
     },
-    head: {
-      title: function() {
-        return {
-          inner: 'Timothy Badiuk - Architect'
+  },
+  created() {
+    this.getSiteSettings();
+    this.getProjects();
+  },
+  mounted(){
+    this.createWackStyle();
+  },
+  methods: {
+    createWackStyle() {
+      let classes = ['font-avant-garde', 'font-clarendon',
+      'font-cooper-black', 'font-futura-bold', 'font-helvetica-now',
+      'font-noto-sans']
+    
+      let el = $(".wack-style");
+
+      for (var x = 0; x < el.length; x++) {
+        let e = el[x];
+      
+        let content = $(e).data('content');
+        if(content.length > 0){
+          for (var i = 0; i < content.length; i++) {
+            let letter = content[i];
+            let spanEl = document.createElement( "span" )
+            let negative = Math.floor(Math.random() * 3) + 1;
+            let skewvalue = Math.floor(Math.random() * (15 - -15 + 1)) + -15;
+            let Yvalue = Math.floor(Math.random() * (10 - -10 + 1)) + -10;
+            let cssClass = classes[Math.floor(Math.random() * classes.length-1) + 1];
+            spanEl.append(letter)
+            if (letter == " ") {
+              $(spanEl).css(
+                { padding : '10px' }
+              )  
+            }
+            spanEl.className = cssClass
+            spanEl.className += ' d-inline-block hover-letter'
+            $(spanEl).css(
+              { 
+                transform : `skew(` + skewvalue +`deg) translateY(` + Yvalue + `px)`,
+              }            
+            ) 
+
+            if(negative == 3 && letter != " ") {
+              spanEl.className += ' negative'
+            }
+            e.append(spanEl);
+          }
         }
       }
+      // console.log(el.html());
     },
-    created() {
-      this.getSiteSettings()
-      this.getProjects()
+    async getProjects() {
+      const api_url = new URL(location.href).href;
+      await axios.get(`${api_url}api/projects`).then((response) => {
+        this.projects = response.data;
+      });
     },
-    methods: {
-      async getSiteSettings() {
-        const api_url = new URL(location.href).href
-        await axios.get(`${api_url}api/settings`).then(response => {
-          this.data = response.data[0]
-        })
-      },
-      async getProjects() {
-        const api_url = new URL(location.href).href
-        await axios.get(`${api_url}api/projects`).then(response => {
-          this.projects = response.data
-        })
-      }
+    async getSiteSettings() {
+      const api_url = new URL(location.href).href;
+      await axios.get(`${api_url}api/settings`).then((response) => {
+        this.data = response.data[0];
+      });
     },
-    computed: {
-      cssVars() {
-        return {
-          '--bg-color': this.data.color,
-          '--font-color': this.data.font_color
-        }
-      },
-      entrySectionBackground(){
-        return {
-          "image" : this.data.entry_section_background
-        }
-      }
-    }
-  }
+    openMenu() {
+      this.toggle($(".menu-main"), "active", "down");
+      this.toggle($(".menu"), "active", "down");
+      this.toggle($(".transition-div-1"), "transition-1", "transition-1-out");
+      this.toggle($(".transition-div-2"), "transition-2", "transition-2-out");
+      this.toggle($(".transition-div-3"), "transition-3", "transition-3-out");
+    },
+  },
+  computed: {
+    cssVars() {
+      return {
+        "--bg-color": this.data.color,
+        "--font-color": this.data.font_color,
+      };
+    },
+  },
+};
 </script>
 
-<style>
+<style lang="scss">
 #app {
-  font-family: Open Sans, Helvetica, Arial, sans-serif;
+  // font-family: Open Sans, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
-.main {
-  background-color: var(--bg-color);
-  color: var(--font-color);
+
+.wack-style {
+  text-shadow: 2px 2px black, 3px 3px white;
+  .negative {
+  text-shadow: 2px 2px white, 3px 3px black;
+
+  }
 }
 
-.text-left {
-  text-align: left;
+.negative {
+  background-color: white;
+  color: black;
 }
 
-h1 {
-  font-family: 'Work Sans', serif;
+.z-index {
+  &-0 {
+    z-index: 0 !important;
+  }
+  &-1 {
+    z-index: 1 !important;
+  }
 }
 
-p {
-  font-family: 'Open Sans', sans-serif;
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
-[class^=material-] {
-  font-size:14px;
+.menu-button {
+  right: 15px;
+  top: 15px;
+  position: fixed;
+  z-index: 15;
 }
 
-.sr-only {
-  display: none;
-}
-
-.hide-letters {
-  /* width: 0!important; */
-  opacity: 0 !important;
-  /* display: none; */
-  transition: 0.5s;
-  font-size: 0;
-}
-
-.show-letters {
-  /* display: inline-block!important; */
-  opacity: 1!important;
-  font-size: 1em;
-  /* width: auto!important; */
-  transition: 0.5s;
+#canvas {
+  // position: relative;
+  // width: 100%;
 }
 </style>

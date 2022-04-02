@@ -44,6 +44,9 @@ export default {
     Slider,
     SliderItem,
   },
+  mounted() {
+    this.createWackStyle();
+  },
   props: {
     selectedProject: {
         type: Object,
@@ -86,7 +89,6 @@ export default {
     overflow-y: auto;
     padding: 10px;
     font-size: 12px;
-    font-family: roboto;
     left: 0;
     right: 0;
 
