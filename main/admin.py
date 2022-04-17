@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .forms import SiteSettingsForm
-from .models import SiteSettings, Project, Image
+from .models import SiteSettings, Project, Image, Experience, Language
 
 class SiteSettingsAdmin(admin.ModelAdmin):
     form = SiteSettingsForm
@@ -16,5 +16,13 @@ class ProjectImageInline(admin.TabularInline):
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [ ProjectImageInline, ]
 
+class ExperienceAdmin(admin.ModelAdmin):
+    model = Experience
+
+class LanguageAdmin(admin.ModelAdmin):
+    model = Language
+
 admin.site.register(SiteSettings, SiteSettingsAdmin)
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(Experience, ExperienceAdmin)
+admin.site.register(Language, LanguageAdmin)

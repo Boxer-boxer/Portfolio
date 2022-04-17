@@ -1,12 +1,12 @@
 <template>
-  <div class="project-section px-5 px-lg-5 pb-4 mx-0">
+  <div class="project-section section px-5 px-lg-5 pb-4 mx-0">
     <div class="black-stroke-right">
-      <div class="sep-title" id="proj-title">
+      <div class="sep-title sep-title-out" id="proj-title">
         <h1 class="wack-style" data-content="Projects"></h1>
       </div>
     </div>
 
-    <div class="row justify-content-end">
+    <div class="row justify-content-end" id="projects-display">
       <a
         v-for="project in projects"
         :key="project.id"
@@ -74,20 +74,8 @@ export default {
 .project-section {
     position: relative;
     padding-top: 185px;
+    background: $primary;
 }
-
-.black-stroke-right {
-    background: #000000;
-    position: absolute;
-    top: -8%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-    height: 185px;
-    transform: skew(0deg, 7deg);
-}
- 
 
 .project {
   display: flex;
@@ -127,7 +115,7 @@ export default {
     display: none;
     opacity: 0;
     z-index: 3;
-    background: $primary;
+    background: $black;
     position: absolute;
     top: -20%;
     bottom: -20%;
@@ -140,7 +128,7 @@ export default {
     display: none;
     opacity: 0;
     z-index: 2;
-    background: $black;
+    background: $primary;
     position: absolute;
     top: -20%;
     bottom: -20%;

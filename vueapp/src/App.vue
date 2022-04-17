@@ -5,6 +5,9 @@
     <SideBar />
     <EntrySection />
     <ProjectSection :projects="this.projects" />
+    <ExperienceSection :experience="this.experience" :languages="this.languages"/>
+    <AboutMeSection />
+    
     <div style="height: 100vh"></div>
   </div>
 </template>
@@ -15,7 +18,10 @@ import SideBar from "./components/SideBar.vue";
 import EntrySection from "./components/EntrySection.vue";
 import toggle from "./mixins/toggle";
 import $ from "jquery";
+import _ from "underscore";
 import ProjectSection from "./components/ProjectSection.vue";
+import ExperienceSection from "./components/ExperienceSection.vue";
+import AboutMeSection from "./components/AboutMeSection.vue";
 
 export default {
   name: "App",
@@ -24,11 +30,15 @@ export default {
     SideBar,
     EntrySection,
     ProjectSection,
+    ExperienceSection,
+    AboutMeSection,
   },
   data() {
     return {
       data: "",
       projects: [],
+      languages: [],
+      experience: []
     };
   },
   head: {
@@ -41,9 +51,17 @@ export default {
   created() {
     this.getSiteSettings();
     this.getProjects();
+    this.getLanguages();
+    this.getExperience();
   },
   mounted(){
     this.createWackStyle();
+    $(window).on('scroll', () => {
+      _.debounce(
+        this.checkElPosition(document.getElementsByClassName('black-stroke'),".sep-title", "sep-title-out"),
+        this.checkElPosition(document.getElementsByClassName('black-stroke-right'),".sep-title", "sep-title-out"),
+        500) 
+    });
   },
   methods: {
     createWackStyle() {
@@ -86,7 +104,6 @@ export default {
           }
         }
       }
-      // console.log(el.html());
     },
     async getProjects() {
       const api_url = new URL(location.href).href;
@@ -100,6 +117,19 @@ export default {
         this.data = response.data[0];
       });
     },
+    async getExperience(){
+      const api_url = new URL(location.href).href;
+      await axios.get(`${api_url}api/experience`).then((response) => {
+        console.log(response.data[0])
+        this.experience = response.data;
+      });
+    },
+    async getLanguages(){
+      const api_url = new URL(location.href).href;
+      await axios.get(`${api_url}api/language`).then((response) => {
+        this.languages = response.data;
+      });
+    },
     openMenu() {
       this.toggle($(".menu-main"), "active", "down");
       this.toggle($(".menu"), "active", "down");
@@ -107,6 +137,22 @@ export default {
       this.toggle($(".transition-div-2"), "transition-2", "transition-2-out");
       this.toggle($(".transition-div-3"), "transition-3", "transition-3-out");
     },
+    checkElPosition(elements, target, classOut){
+      [].forEach.call(elements, function (each) {
+        let el = each.querySelector(target);
+        if(el != null) {
+          var rect = el.getBoundingClientRect();
+          let withinView = rect.top >= 0 
+          let out = rect.left >= 0
+
+          if(withinView == false) {
+            el.classList.add(classOut);
+          } else if (withinView && out == false) {
+            setTimeout(() => { el.classList.remove(classOut) }, 500);
+          }
+        }
+      })
+    }
   },
   computed: {
     cssVars() {
@@ -120,6 +166,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/assets/_variables.scss";
+
 #app {
   // font-family: Open Sans, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -134,6 +182,44 @@ export default {
   text-shadow: 2px 2px white, 3px 3px black;
 
   }
+}
+
+.text- {
+  &white {
+    color: $white;
+  }
+  &black {
+    color: $black;
+  }
+}
+
+.bg- {
+  &white {
+    background: $white;
+  }
+  &black {
+    background: $black;
+  }
+}
+
+.rotate-20deg {
+  transform: rotate(-20deg)
+}
+
+.mb-6 {
+  margin-bottom: 3.5em;
+}
+
+.black-stroke-right {
+    background: $black;;
+    position: absolute;
+    top: -8%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    height: 185px;
+    transform: skew(0deg, 7deg);
 }
 
 .negative {
@@ -166,4 +252,17 @@ body {
   // position: relative;
   // width: 100%;
 }
+
+.shadow-primary-left {
+  top: -35%;
+  bottom: -10%;
+  left: 0;
+  right: -10%;
+  background: linear-gradient(90deg, $secondary 0%, $secondary 25%, $primary 25%, $primary 100%);  ;
+  clip-path: polygon(0 25%, 96% 0%, 93% 100%, 0% 80%);
+  position: absolute;
+  transform: skew(5deg, -7deg);
+  transition: 0.2s linear;
+}
+
 </style>

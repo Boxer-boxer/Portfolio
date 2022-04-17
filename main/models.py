@@ -32,3 +32,13 @@ class Image(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="project_image")
     image = models.ImageField(upload_to=upload_project_img_path)
     thumbnail = models.BooleanField(default=False)
+
+class Experience(models.Model):
+    name = models.CharField(max_length=455)
+    job = models.CharField(max_length=455)
+    start_date = models.CharField(max_length=455)
+    end_date = models.CharField(max_length=455)
+    
+class Language(models.Model):
+    name = models.CharField(max_length=455)
+    image = models.ImageField(upload_to=upload_project_img_path)

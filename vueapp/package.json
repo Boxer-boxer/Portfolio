@@ -16,6 +16,7 @@
     "core-js": "^3.6.5",
     "jquery": "^3.6.0",
     "scroll-watcher": "^2.1.0",
+    "underscore": "^1.13.2",
     "vue": "^2.6.11",
     "vue-easy-slider": "^5.3.4",
     "vue-head": "^2.2.0"

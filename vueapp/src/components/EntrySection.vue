@@ -1,5 +1,5 @@
 <template>
-  <div class="position-relative main entry" id="entry">
+  <div class="position-relative section main entry" id="entry">
     <!-- <canvas id="canvas-left" class="canvas-left"></canvas> -->
     <canvas id="canvas-right" class="canvas-right"></canvas>
     <div class="black-stroke">
@@ -19,9 +19,6 @@
 </template>
 
 <script>
-// import $ from 'jquery';
-import ScrollWatcher from 'scroll-watcher';
-
 export default {
   name: 'EntrySection',
   props: {},
@@ -30,26 +27,8 @@ export default {
       }
   },
   methods: {
-    onScrollElement(element, outClass){
-      var scroll = new ScrollWatcher();
-      scroll
-        .watch(element)
-        .on("enter", function() {
-          element.classList.remove(outClass)
-        })
-        .on("exit:partial", function() {
-          element.classList.add(outClass)
-        })
-    }
   },
   mounted() {
-    let devtitle = document.getElementById('dev-title');
-    let maintitle = document.getElementById('main-title');
-    let projecttitle = document.getElementById('proj-title');
-
-    this.onScrollElement(devtitle, "sep-title-out");
-    this.onScrollElement(projecttitle, "sep-title-out");
-    this.onScrollElement(maintitle, "main-title-out");
   },
 }
 </script>
@@ -152,17 +131,6 @@ export default {
     font-size: 32px;
     white-space: nowrap;
   }
-  .shadow-primary-left {
-    top: -35%;
-    bottom: -10%;
-    left: 0;
-    right: -10%;
-    background: linear-gradient(90deg, $secondary 0%, $secondary 25%, $primary 25%, $primary 100%);  ;
-    clip-path: polygon(0 25%, 96% 0%, 93% 100%, 0% 80%);
-    position: absolute;
-    transform: skew(5deg, -7deg);
-    transition: 0.2s linear;
-  }
 }
 
 .wack-style {
@@ -178,23 +146,12 @@ export default {
     margin-bottom: 0;
     pointer-events: all;
     white-space: nowrap;
-    transition: 0.1s liner;
-  transition: 0.2s linear;
+    // transition: 0.1s liner;
+    transition: 0.2s linear;
+    -webkit-backface-visibility: hidden;
 
     &-out {
-        right: 200%
-      }
-
-    &:hover {
-      h1 {
-        &:after {
-          left: 10px;
-          right: 0px;
-          bottom: -1px;
-          z-index: -1;
-          color: $secondary;
-        }  
-      }
+      right: 200%
     }
     h1 {
       margin-bottom: 0;
