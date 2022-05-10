@@ -2,11 +2,10 @@
   <div class="position-relative section main entry" id="entry">
     <!-- <canvas id="canvas-left" class="canvas-left"></canvas> -->
     <canvas id="canvas-right" class="canvas-right"></canvas>
-    <div class="black-stroke">
-      <div class="sep-title" id="dev-title">
-        <h1 class="wack-style" data-content="Web Developer"></h1>
-      </div>
+    <div>
+      <StrokeTitle title="Web Developer" orientantion-class="black-stroke" sepTitleId="entry-title" containerTitleId="entry-container-title"/>
     </div>
+    
     <div class="main-content">
       <div class="main-title" id="main-title">
         <h1 class="">
@@ -19,9 +18,13 @@
 </template>
 
 <script>
+import StrokeTitle from "./StrokeTitle.vue"
+
 export default {
   name: 'EntrySection',
-  props: {},
+  components: {
+    StrokeTitle
+  },
   data() {
       return {
       }
@@ -133,10 +136,6 @@ export default {
   }
 }
 
-.wack-style {
-
-}
-
 .sep-title {
     top: 25%;
     right: 6%;
@@ -220,18 +219,6 @@ export default {
   pointer-events: none;
   width: 100%;
   height: 100%;
-}
-
-.black-stroke {
-  background: $black;
-  position: absolute;
-  top: 70%;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  pointer-events: none;
-  height: 185px;
-  transform: skew(0deg, -7deg);
 }
 
 </style>

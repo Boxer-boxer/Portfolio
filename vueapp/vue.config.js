@@ -7,5 +7,5 @@ module.exports = {
     runtimeCompiler: true, // See: https://vuejs.org/v2/guide/installation.html#Runtime-Compiler-vs-Runtime-only
     devServer: {
         writeToDisk: true, // Write files to disk in dev mode, so Django can serve the assets
-    }
+    },
 };

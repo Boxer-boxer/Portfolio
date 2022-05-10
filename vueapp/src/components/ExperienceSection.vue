@@ -1,39 +1,45 @@
 <template>
-  <div class="experience-section section">
-    <div class="code-background">
-    </div>
-    <div class="position-relative stroke-container">
-      <div class="black-stroke">
-        <div class="sep-title" id="exp-title">
-          <h1 class="wack-style" data-content="Experience"></h1>
+  <section id='section-experience'>
+    <StrokeTitle title="Experience" orientantion-class="black-stroke" sepTitleId="exp-title" containerTitleId="exp-container-title"/>
+
+    <div class="experience-section section">
+      <div class="code-background">
+      </div>
+
+<!--       
+      <div class="position-relative stroke-container">
+        <div class="black-stroke-right z-index-0">
         </div>
-      </div>
-      <div class="black-stroke-right">
-      </div>
-    </div>
-    <div class="experience-display px-5 px-lg-5 mx-0 row">
-      <ul class="text-white col-12 col-xl-6">
-        <li v-for="exp in experience" :key="exp.name" class="list-unstyled mb-6 exp"> 
-          <h5 class="text-white exp-name"> {{exp.name}} </h5>
-          <span class="bg-black p-2 exp-job">{{exp.job}} - {{exp.start_date}} to {{exp.end_date}}</span>
-        </li>
-      </ul>
-      <div class="col-12 col-xl-6 d-flex flex-wrap justify-content-center">
-        <div class="m-2 language" v-for="language in languages" :key="language.name"> 
-          <div class="language-div bg-black">
-            <img :src="language.image" :alt="language.name" style="max-width: 200px;">
-            <span class="h5 text-white">{{language.name}}</span>
+      </div> -->
+
+      <div class="experience-display px-5 px-lg-5 mx-0 row">
+        <ul class="text-white col-12 col-xl-6 d-flex justify-content-center align-items-start flex-column">
+          <li v-for="exp in experience" :key="exp.name" class="list-unstyled mb-6 exp w-100"> 
+            <h5 class="text-white exp-name"> {{exp.name}} </h5>
+            <span class="bg-black p-2 exp-job">{{exp.job}} - {{exp.start_date}} to {{exp.end_date}}</span>
+          </li>
+        </ul>
+        <div class="col-12 col-xl-6 d-flex flex-wrap justify-content-center">
+          <div class="m-2 language" v-for="language in languages" :key="language.name"> 
+            <div class="language-div bg-black">
+              <img :src="language.image" :alt="language.name" style="max-width: 200px;">
+              <span class="h5 text-white">{{language.name}}</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
+import StrokeTitle from "./StrokeTitle.vue"
+
 export default {
   name: "ExperienceSection",
-  components: {},
+  components: {
+    StrokeTitle,
+  },
   props: {
     experience: {
       type: Array,
@@ -67,7 +73,7 @@ export default {
     position: relative;
 
     .experience-display{ 
-      padding-bottom: 170px;
+      padding: 200px 0;
     }
     .code-background {
       pointer-events: none;
@@ -77,9 +83,9 @@ export default {
       bottom: 0;
       top: 0;
       background-image: url("/media/images/code-background.PNG");
-      background-position: -450% 0%;
+      background-position: center;
       z-index: -5;
-      background-attachment: fixed;
+      // background-attachment: fixed;
 
       &-text {
         text-align: right;
@@ -119,9 +125,10 @@ export default {
     .stroke-container {
       padding-bottom: 320px;
     }
+
     .black-stroke {
       top: 10%;
-      z-index: 15;
+      // z-index: 15;
       &-right {
         z-index: 0;
         top: -20%;  
@@ -149,6 +156,7 @@ export default {
         
       }
     }
+    
     @keyframes wave {
       0% {
         clip-path: polygon(86% 0, 71% 32%, 85% 49%, 66% 75%, 94% 100%, 0 100%, 0 0);
@@ -160,6 +168,7 @@ export default {
         clip-path: polygon(86% 0, 71% 32%, 85% 49%, 66% 75%, 94% 100%, 0 100%, 0 0);
       }
     }
+
     @keyframes wave-2 {
       0% {
         clip-path: polygon(90% 10%, 78% 30%, 86% 49%, 75% 75%, 91% 100%, 0 100%, 0 0);
@@ -170,16 +179,8 @@ export default {
       100% {
         clip-path: polygon(90% 10%, 78% 30%, 86% 49%, 75% 75%, 91% 100%, 0 100%, 0 0);
       }
-      // 0% {
-        // clip-path: polygon(86% 0, 71% 32%, 65% 49%, 66% 75%, 100% 100%, 0 100%, 0 0)
-      // }
-      // 50% {
-        // clip-path: polygon(16% 0, 1% 32%, 0% 49%, 96% 75%, 24% 100%, 0 70%, 0 0)
-      // }
-      // 100% {
-        // clip-path: polygon(66% 0, 51% 32%, 55% 49%, 46% 75%, 94% 100%, 0 40%, 0 0)
-      // }
     }
+    
     @keyframes hover-beat {
       0% {
         transform: skewX(10deg);
@@ -191,6 +192,7 @@ export default {
         transform: skewX(0deg);
       }
     }
+
     .exp {
       position: relative;
       &::after {
@@ -220,6 +222,7 @@ export default {
         }
       }
     }
+
     .exp-job {
       transform: skew(-15deg) rotate(-10deg);
       display: block;
@@ -229,6 +232,7 @@ export default {
       position: relative;
       max-width: 24em;
     }
+
     .exp-name {
       display: block;
       transform: rotate(2deg);

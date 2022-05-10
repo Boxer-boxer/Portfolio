@@ -27,4 +27,4 @@ urlpatterns = [
     path('api/settings', main_views.site_settings),
     path('', include(main_routers.router.urls)),
     path('tinymce/', include('tinymce.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

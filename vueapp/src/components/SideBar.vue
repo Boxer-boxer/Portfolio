@@ -7,9 +7,15 @@
 
       <div class="menu">
         <ul>
-          <li>A</li>
-          <li>B</li>
-          <li>C</li>
+          <li>
+            <a to="#section-project" class="wack-style close-menu" data-content="Project" v-on:click="closeMenu"></a>
+          </li>
+          <li>
+            <a to="#section-experience" class="wack-style close-menu" data-content="Experience" v-on:click="closeMenu"></a>
+          </li>
+          <li>
+            <a to="#section-about-me" class="wack-style" data-content="About Me" v-on:click="closeMenu"></a>
+          </li>
           <button class="close-menu"  v-on:click="closeMenu">Close menu</button>
         </ul>
       </div>
@@ -29,6 +35,7 @@ export default {
   },
   methods: {
     closeMenu() {
+      console.log("menu close")
       this.toggle($(".menu-main"), "down", "active");
       this.toggle($(".menu"), "down", "active");
       this.toggle($(".transition-div-1"), "transition-1-out", "transition-1");
@@ -74,6 +81,15 @@ export default {
   align-items: center;
   justify-content: flex-start;
   padding: 50px;
+  ul {
+    li {
+      list-style-type: none;
+      a {
+        color: $white;
+        font-size: 30px;
+      }
+    }
+  }
 }
 
 .menu.active {
@@ -108,7 +124,7 @@ export default {
   animation: gradient-2 2.5s ease 0.15s forwards;
 }
 .transition-3 {
-  border-top: 0 solid $black;
+  border-top: 0 solid $primary;
   animation: gradient 2s ease 0.35s forwards;
 }
 
@@ -123,7 +139,7 @@ export default {
   animation: gradient-out-2 2s ease 0.15s forwards;
 }
 .transition-3-out {
-  border-top: 5000px solid $black;
+  border-top: 5000px solid $primary;
   border-left: 5000px solid transparent;
   animation: gradient-out 2s ease forwards;
 }
