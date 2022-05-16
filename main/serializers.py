@@ -1,6 +1,6 @@
 from pyexpat import model
 from rest_framework import serializers
-from .models import Project, Image, Experience, Language
+from .models import Project, Image, Experience, Language, AboutMe
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,4 +23,9 @@ class ExperienceSerializer(serializers.ModelSerializer):
 class LanguageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Language
+        fields = '__all__'
+
+class AboutMeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AboutMe
         fields = '__all__'

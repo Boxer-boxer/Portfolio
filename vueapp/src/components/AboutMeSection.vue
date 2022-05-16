@@ -4,21 +4,19 @@
     
     <div class="about-me-section section">
       <div class="about-me-container">
-        <div class="row h-100">
+        <div class="row h-100 w-100">
           <div class="col-8 d-flex justify-content-center align-items-center px-5">
             <div class="speech-balloon-container">
-              <div class="speech-balloon">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum quas repudiandae rem voluptatibus, error debitis, quidem accusantium officia consectetur quae praesentium veniam distinctio pariatur, minus et dolorem. Quam, ipsum similique!
+              <div class="speech-balloon" v-html="aboutme.content">
               </div>
               <div class="speech-balloon-shadow"></div>
             </div>
           </div>
           <div class="col-4 d-flex align-items-end justify-content-center">
             <div class="portrait-container">
-              
-              <img src="../../../media/images/guy.png.png" class="portrait img-fluid" alt="">
+              <img :src="aboutme.image" class="portrait img-fluid" alt="">
               <div class="portrait-curtain">
-                <img src="../../../media/images/guy-darken.png.png" class="portrait-overlay img-fluid" alt="">
+                <img :src="aboutme.image_shadow" class="portrait-overlay img-fluid" alt="">
               </div>
             </div>
           </div>
@@ -34,9 +32,17 @@ import _ from "underscore";
 import StrokeTitle from "./StrokeTitle.vue"
 
 export default {
-  name: 'EntrySection',
+  name: 'AboutMeSection',
   components: {
     StrokeTitle,
+  },
+  props: {
+    aboutme: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    }
   },
   data() {
     return {
@@ -119,11 +125,13 @@ export default {
   }
   .portrait {
     filter: drop-shadow(1px 1px 0 black)
-    drop-shadow(-10px 0px 0px $secondary)
+    drop-shadow(-10px 0px 0px $secondary);
+    width: 250px;
   }
   .portrait-overlay {
     position: absolute;
     z-index: 10;
+    width: 250px;
   }
 }
 
@@ -162,6 +170,7 @@ export default {
       height: auto;
       width: 100%;
       position: relative;
+      margin-bottom: 5rem;
     }
     &-shadow {
       position: absolute;

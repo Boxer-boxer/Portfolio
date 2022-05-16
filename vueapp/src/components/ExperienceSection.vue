@@ -105,7 +105,7 @@ export default {
       background: $secondary;
       z-index: -1;
       pointer-events: none;
-      animation: wave 1s infinite;
+      animation: wave 2s infinite;
 
     }
     &:before {
@@ -119,7 +119,7 @@ export default {
       z-index: -1;
       pointer-events: none;
       clip-path: polygon(90% 0, 76% 30%, 89% 49%, 70% 75%, 95% 100%, 0 100%, 0 0);
-      animation: wave-2 1s infinite;
+      animation: wave-2 2s infinite;
 
     }
     .stroke-container {
@@ -135,8 +135,7 @@ export default {
       }
     }
     .language {
-      width: auto;
-      padding: 15px;
+      width: 47%;
       &:hover {
         .language-div {
           animation-name: hover-beat;
@@ -171,13 +170,13 @@ export default {
 
     @keyframes wave-2 {
       0% {
-        clip-path: polygon(90% 10%, 78% 30%, 86% 49%, 75% 75%, 91% 100%, 0 100%, 0 0);
+        clip-path: polygon(90% 0%, 78% 30%, 86% 49%, 75% 75%, 91% 100%, 0 100%, 0 0);
       }
       50% {
-        clip-path: polygon(90% 0, 76% 30%, 89% 49%, 70% 75%, 95% 100%, 0 100%, 0 0);
+        clip-path: polygon(88% 0, 76% 30%, 89% 49%, 70% 75%, 95% 100%, 0 100%, 0 0);
       }
       100% {
-        clip-path: polygon(90% 10%, 78% 30%, 86% 49%, 75% 75%, 91% 100%, 0 100%, 0 0);
+        clip-path: polygon(90% 0%, 78% 30%, 86% 49%, 75% 75%, 91% 100%, 0 100%, 0 0);
       }
     }
     

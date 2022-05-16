@@ -1,16 +1,21 @@
 <template>
   <div class="main" :style="cssVars">
-    <button class="menu-button" v-on:click="openMenu">
-      <span class="menu-button-bar" id="menu-button-bar-1"></span>
-      <span class="menu-button-bar" id="menu-button-bar-2"></span>
-      <span class="menu-button-bar" id="menu-button-bar-3"></span>
-    </button>
+    <div class="menu-button-container">
+      <button class="menu-button" v-on:click="openMenu">
+        <div class="menu-icon">
+          <span class="menu-button-bar" id="menu-button-bar-1"></span>
+          <span class="menu-button-bar" id="menu-button-bar-2"></span>
+          <span class="menu-button-bar" id="menu-button-bar-3"></span>
+        </div>
+      </button>
+    </div>
 
     <SideBar />
     <EntrySection />
     <ProjectSection :projects="this.projects" />
     <ExperienceSection :experience="this.experience" :languages="this.languages"/>
-    <AboutMeSection />
+    <AboutMeSection :aboutme="this.aboutme" />
+    <ContactMeSection />
     
   </div>
 </template>
@@ -24,6 +29,7 @@ import $ from "jquery";
 import ProjectSection from "./components/ProjectSection.vue";
 import ExperienceSection from "./components/ExperienceSection.vue";
 import AboutMeSection from "./components/AboutMeSection.vue";
+import ContactMeSection from "./components/ContactMeSection.vue";
 
 export default {
   name: "App",
@@ -34,13 +40,15 @@ export default {
     ProjectSection,
     ExperienceSection,
     AboutMeSection,
+    ContactMeSection
   },
   data() {
     return {
       data: "",
       projects: [],
       languages: [],
-      experience: []
+      experience: [],
+      aboutme: {}
     };
   },
   head: {
@@ -55,6 +63,7 @@ export default {
     this.getProjects();
     this.getLanguages();
     this.getExperience();
+    this.getAboutMe();
   },
   mounted(){
     this.createWackStyle();
@@ -125,6 +134,12 @@ export default {
         this.languages = response.data;
       });
     },
+    async getAboutMe(){
+      const api_url = new URL(location.href).href;
+      await axios.get(`${api_url}api/aboutme`).then((response) => {
+        this.aboutme = response.data[0];
+      });
+    },
     openMenu() {
       this.toggle($(".menu-main"), "active", "down");
       this.toggle($(".menu"), "active", "down");
@@ -179,6 +194,9 @@ export default {
   &black {
     background: $black;
   }
+  &primary {
+    background: $primary!important;
+  }
 }
 
 .rotate-20deg {
@@ -208,13 +226,39 @@ body {
   overflow-x: hidden;
 }
 
+.menu-icon {
+  transform: rotate(9deg);
+}
+
 .menu-button {
-  right: 1rem;
-  top: 1rem;
-  position: fixed;
   z-index: 15;
-  background: none;
+  padding: 10px;
+  background: $white;
   border: none;
+  transform: rotate(-9deg);
+  cursor: pointer;
+
+  &-container {
+    right: 1rem;
+    top: 1rem;
+    position: fixed;
+    z-index: 15;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: -5px;
+      bottom: -6px;
+      left: -6px;
+      right: -5px;
+      background: $black;
+      z-index: -1;
+      transform: rotate(11deg);
+    }
+  }
+
+  
+
   &-bar {
     border-radius: 10px;
     width: 40px;
