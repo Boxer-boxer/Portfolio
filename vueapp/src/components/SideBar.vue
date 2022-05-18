@@ -29,6 +29,12 @@
             v-on:click="closeMenu">
             <span class="wack-style" data-to="section-about-me" data-content="About Me"></span>
           </li>
+          <li 
+            data-to="section-contact-me close-menu" 
+            class="navbar-item" 
+            v-on:click="closeMenu">
+            <span class="wack-style" data-to="section-contact-me" data-content="Contact Me"></span>
+          </li>
         </ul>
         
         <button class="close-menu close-menu-button"  v-on:click="closeMenu">x</button>

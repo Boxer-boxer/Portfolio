@@ -85,6 +85,10 @@ export default {
       background-image: url("/media/images/code-background.PNG");
       background-position: center;
       z-index: -5;
+      @media (max-width: 1200px) {
+        background-position: 10%;
+        left: 60%;
+      }
       // background-attachment: fixed;
 
       &-text {
@@ -135,7 +139,7 @@ export default {
       }
     }
     .language {
-      width: 47%;
+      width: 46%;
       &:hover {
         .language-div {
           animation-name: hover-beat;
@@ -153,6 +157,11 @@ export default {
         padding: 15px 20px;
         position: relative;
         
+        @media (max-width: 1200px) {
+          .h5 {
+            font-size: 40px!important;
+          }
+        }
       }
     }
     
@@ -220,6 +229,9 @@ export default {
           clip-path: polygon(0 0, 100% 13%, 100% 54%, 0% 100%);
         }
       }
+      @media (max-width: 1200px) {
+        font-size: 23px
+      }
     }
 
     .exp-job {
@@ -241,6 +253,9 @@ export default {
       text-shadow: 2px 0px $primary, 2.5px 0px $white;
       z-index: 10;
       width: 100%;
+      @media (max-width: 1200px) {
+        font-size: 30px
+      }
     }
   }
 </style>

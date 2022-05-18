@@ -2,17 +2,18 @@
   <div class="position-relative section main entry" id="entry">
     <!-- <canvas id="canvas-left" class="canvas-left"></canvas> -->
     <canvas id="canvas-right" class="canvas-right"></canvas>
-    <div>
-      <StrokeTitle title="Web Developer" orientantion-class="black-stroke" sepTitleId="entry-title" containerTitleId="entry-container-title"/>
-    </div>
-    
-    <div class="main-content">
+    <div class="entry-div">
       <div class="main-title" id="main-title">
         <h1 class="">
           Jorge da Silva
         </h1>
         <div class="shadow-primary-left"></div>
       </div>
+      <StrokeTitle title="Web Developer" orientantion-class="black-stroke" sepTitleId="entry-title" containerTitleId="entry-container-title"/>
+    </div>
+    
+    <div class="main-content">
+      <div class="responsive-background"></div>
     </div>
   </div>
 </template>
@@ -94,8 +95,14 @@ export default {
   font-family: Personalized;
 }
 
-.main-title {
+.entry-div {
+  position: relative;
   top: 65%;
+  height: 7rem;
+}
+
+.main-title {
+  top: -15%;
   left: 30%;
   position: absolute;
   text-transform: uppercase;
@@ -103,16 +110,19 @@ export default {
   pointer-events: all;
   transition: 0.2s linear;
   font-family: Personalized;
+  z-index: 10;
+  
+  @media (max-width: 1200px) {
+    left: 25%;
+  }
 
   &-out {
     left: 200%
   }
   &:hover {
     .shadow-primary-left {
-      // animation: tilt 3s infinite forwards;
-// polygon(0 17%, 100% 0%, 95% 100%, 0% 85%)
-    clip-path: polygon(0 17%, 100% 0%, 95% 100%, 0% 85%);
-    transition: 0.1s liner;
+      clip-path: polygon(0 17%, 100% 0%, 95% 100%, 0% 85%);
+      transition: 0.1s liner;
     }
   }
 
@@ -194,6 +204,22 @@ export default {
   }
 }
 
+.responsive-background {
+  @media (max-width: 1200px) {
+    background-repeat: repeat;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-position: center;
+    background-size: 5%;
+    clip-path: polygon(55% 0, 100% 0%, 100% 100%, 0% 100%);
+    background-image: url("../../../media/images/tile.png");
+    z-index: 0;
+  }
+}
+
 .canvas-left {
   position: absolute;
   left: 0;
@@ -209,10 +235,9 @@ export default {
   bottom: 0;
   top: 0;
   background: 
-  linear-gradient(290deg, $secondary 0%, $secondary 55%, $black 25%, $black 75%, $primary 75%)
-  // linear-gradient(290deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 25%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 35%, rgba(255,255,255,1) 35%);
-  // linear-gradient(90deg, $primary 0%, $primary 25%, $secondary 25%); ;
-  // clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 0px 100%);
+  linear-gradient(290deg, $secondary 0%, $secondary 55%, $black 25%, $black 75%, $primary 75%);
+  height: 100%;
+  width: 100%;
 }
 
 .main-content {

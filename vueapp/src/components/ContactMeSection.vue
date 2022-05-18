@@ -1,8 +1,8 @@
 <template>
-  <section id="section-about-me">
+  <section id="section-contact-me">
     <StrokeTitle title="Contact me!" orientantion-class="black-stroke" sepTitleId="contact-me-title" containerTitleId="contact-me-container-title"/>
     <div class="row mx-0">
-      <div class="col-12 col-lg-6 bg-black d-flex align-items-end justify-content-center mt-5">
+      <div class="contact-me-col col-12 col-lg-6 bg-black d-flex align-items-end justify-content-center">
         <div class="d-flex align-items-center flex-column justify-content-center" style="height:500px">
           <a href="https://github.com/Boxer-boxer" class="contact-me-icon mb-4">
             <img src="../../../media/images/github.png" alt="Github Logo">
@@ -31,8 +31,8 @@
 </template>
 
 <script>
-// import $ from "jquery";
-// import _ from "underscore";
+import $ from "jquery";
+import _ from "underscore";
 import StrokeTitle from "./StrokeTitle.vue"
 
 export default {
@@ -50,14 +50,37 @@ export default {
   },
   data() {
     return {
-      // portraitInView: false
+      iconInView: false
     };
   },
   mounted(){
-
+    $(window).on('scroll', () => {
+      _.debounce(this.checkIconPosition(), 1000) 
+    })
   },
   methods: {
-   
+   checkIconPosition() {
+    if($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+      $(".contact-me-icon").addClass("active");
+    } else {
+      $(".contact-me-icon").removeClass("active");
+    }
+     // var self = this;
+
+      // [].forEach.call(elements, (each) => {
+
+      //   let el = each.querySelector(target);
+      //   if(el != null) {
+      //     var rect = el.getBoundingClientRect();
+      //     let detectionMargin = 200;
+      //     let withinView = rect.top >= 0 && (rect.bottom - detectionMargin ) <= (window.innerHeight || document.documentElement.clientHeight);
+          
+      //     self.iconInView = withinView;
+      //     console.log(self.iconInView)
+
+      //   }
+      // })
+    },
   }
 }
 </script>
@@ -67,6 +90,9 @@ export default {
 // @import url('https://fonts.googleapis.com/css2?family=Italiana&family=Roboto:wght@300&display=swap');
 @import "@/assets/_variables.scss";
 
+.contact-me-col {
+  margin-top: 3rem;
+}
 .contact-me-icon {
   // background: $white;
   max-height: 150px;
@@ -93,7 +119,7 @@ export default {
     position: relative;
   }
 
-  &:hover {
+  &.active {
     &:after {
       content: "";
       position: absolute;

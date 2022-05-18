@@ -5,14 +5,14 @@
     <div class="about-me-section section">
       <div class="about-me-container">
         <div class="row h-100 w-100">
-          <div class="col-8 d-flex justify-content-center align-items-center px-5">
+          <div class="col-12 col-lg-8 d-flex justify-content-center align-items-center px-5">
             <div class="speech-balloon-container">
               <div class="speech-balloon" v-html="aboutme.content">
               </div>
               <div class="speech-balloon-shadow"></div>
             </div>
           </div>
-          <div class="col-4 d-flex align-items-end justify-content-center">
+          <div class="col-12 col-lg-4 d-flex align-items-end justify-content-center">
             <div class="portrait-container">
               <img :src="aboutme.image" class="portrait img-fluid" alt="">
               <div class="portrait-curtain">
@@ -165,6 +165,12 @@ export default {
     -webkit-clip-path: polygon(9% 7%, 20% 14%, 49% 7%, 70% 12%, 84% 7%, 85% 23%, 82% 35%, 100% 37%, 81% 52%, 88% 65%, 84% 77%, 79% 87%, 56% 87%, 34% 81%, 25% 88%, 5% 88%, 11% 63%, 3% 40%, 11% 27%);
     clip-path: polygon(10% 5%, 22% 3%, 56% 2%, 69% 2%, 87% 7%, 90% 23%, 90% 34%, 100% 37%, 90% 59%, 88% 66%, 84% 77%, 79% 92%, 63% 95%, 49% 94%, 25% 97%, 16% 96%, 6% 85%, 2% 66%, 2% 42%, 4% 24%);
     z-index: 1;
+    
+    @media (max-width: 1200px) {
+      clip-path: polygon(6.88% 8.28%, 22% 3%, 44.38% 1%, 69% 2%, 88.88% 5.18%, 95.63% 16.54%, 98% 29%, 99% 45.92%, 98.5% 61.09%, 98.63% 70.28%, 94.00% 83.82%, 79% 92%, 49.25% 95.45%, 49.13% 104.19%, 39.38% 95.82%, 16% 96%, 6% 85%, 2% 66%, 2% 42%, 4% 24%);
+      padding: 3em;
+      font-size: 30px;
+    }
 
     &-container {
       height: auto;
@@ -182,6 +188,9 @@ export default {
       z-index: 0;
       background: $primary;
       animation: speechBubble 2s infinite;
+      @media (max-width: 1200px) {
+        animation: speechBubbleResponsive 2s infinite;
+      }
     }
 }
 
@@ -197,6 +206,17 @@ export default {
   100% {
     -webkit-clip-path: polygon(10% 5%, 22% 3%, 56% 2%, 69% 2%, 87% 7%, 90% 23%, 90% 34%, 100% 37%, 90% 59%, 88% 66%, 84% 77%, 79% 92%, 63% 95%, 49% 94%, 25% 97%, 16% 96%, 6% 85%, 2% 66%, 2% 42%, 4% 24%);
       clip-path: polygon(10% 5%, 22% 3%, 56% 2%, 69% 2%, 87% 7%, 90% 23%, 90% 34%, 100% 37%, 90% 59%, 88% 66%, 84% 77%, 79% 92%, 63% 95%, 49% 94%, 25% 97%, 16% 96%, 6% 85%, 2% 66%, 2% 42%, 4% 24%);    
+  }
+}
+@keyframes speechBubbleResponsive {
+  0% {
+    clip-path: polygon(7.88% 9.28%, 23% 4%, 45.38% 2%, 70% 3%, 89.88% 6.18%, 96.63% 17.54%, 99% 30%, 100% 46.92%, 99.5% 62.09%, 99.63% 71.28%, 95.00% 84.82%, 80% 93%, 50.25% 96.45%, 50.13% 105.19%, 40.38% 96.82%, 17% 98%, 7% 86%, 3% 67%, 3% 43%, 5% 25%);
+  }
+  50% {
+    clip-path: polygon(5.88% 6.28%, 20% 2%, 42.38% 0%, 68% 1%, 87.88% 5.18%, 94.63% 15.54%, 98% 29%, 98% 45.92%, 97.5% 60.09%, 97.63% 69.28%, 93.00% 82.82%, 78% 90%, 48.25% 94.45%, 49.13% 104.19%, 38.38% 94.82%, 15% 96%, 5% 84%, 1% 65%, 1% 41%, 2% 23%);
+  }
+  100% {
+    clip-path: polygon(7.88% 9.28%, 23% 4%, 45.38% 2%, 70% 3%, 89.88% 6.18%, 96.63% 17.54%, 99% 30%, 100% 46.92%, 99.5% 62.09%, 99.63% 71.28%, 95.00% 84.82%, 80% 93%, 50.25% 96.45%, 50.13% 105.19%, 40.38% 96.82%, 17% 98%, 7% 86%, 3% 67%, 3% 43%, 5% 25%);
   }
 }
 
