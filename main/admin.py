@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .forms import SiteSettingsForm
-from .models import SiteSettings, Project, Image, Experience, Language
+from .models import SiteSettings, Project, Image, Experience, Language, AboutMe
 
 class SiteSettingsAdmin(admin.ModelAdmin):
     form = SiteSettingsForm
@@ -21,8 +21,12 @@ class ExperienceAdmin(admin.ModelAdmin):
 
 class LanguageAdmin(admin.ModelAdmin):
     model = Language
+    
+class AboutMeAdmin(admin.ModelAdmin):
+    model = AboutMe
 
 admin.site.register(SiteSettings, SiteSettingsAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Experience, ExperienceAdmin)
 admin.site.register(Language, LanguageAdmin)
+admin.site.register(AboutMe, AboutMeAdmin)

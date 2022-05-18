@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import SiteSettings, Project, Experience, Language
-from .serializers import ProjectSerializer, ExperienceSerializer, LanguageSerializer
+from .models import SiteSettings, Project, Experience, Language, AboutMe
+from .serializers import ProjectSerializer, ExperienceSerializer, LanguageSerializer, AboutMeSerializer
 from rest_framework import viewsets
 
 def home(request):
@@ -22,4 +22,8 @@ class ExperienceRetrieveUpdateDestroyAPIView(viewsets.ModelViewSet):
 class LanguageRetrieveUpdateDestroyAPIView(viewsets.ModelViewSet):
     serializer_class  = LanguageSerializer
     queryset = Language.objects.all()
+
+class AboutMeRetrieveUpdateDestroyAPIView(viewsets.ModelViewSet):
+    serializer_class  = AboutMeSerializer
+    queryset = AboutMe.objects.all()
    

@@ -7,11 +7,37 @@
 
       <div class="menu">
         <ul>
-          <li>A</li>
-          <li>B</li>
-          <li>C</li>
-          <button class="close-menu"  v-on:click="closeMenu">Close menu</button>
+          <li data-to="section-project close-menu" 
+              class="navbar-item" 
+              v-on:click="closeMenu">
+            <span 
+              class="wack-style" 
+              data-to="section-project" 
+              data-content="Project"
+            >
+            </span>
+          </li>
+          <li 
+            data-to="section-experience close-menu" 
+            class="navbar-item" 
+            v-on:click="closeMenu">
+            <span class="wack-style" data-to="section-experience" data-content="Experience"></span>
+          </li>
+          <li 
+            data-to="section-about-me close-menu" 
+            class="navbar-item" 
+            v-on:click="closeMenu">
+            <span class="wack-style" data-to="section-about-me" data-content="About Me"></span>
+          </li>
+          <li 
+            data-to="section-contact-me close-menu" 
+            class="navbar-item" 
+            v-on:click="closeMenu">
+            <span class="wack-style" data-to="section-contact-me" data-content="Contact Me"></span>
+          </li>
         </ul>
+        
+        <button class="close-menu close-menu-button"  v-on:click="closeMenu">x</button>
       </div>
     </div>
   </div>
@@ -27,15 +53,32 @@ export default {
   props: {
     msg: String,
   },
+  mounted(){
+    this.activateItem();
+  },
   methods: {
-    closeMenu() {
+    closeMenu(e) {
       this.toggle($(".menu-main"), "down", "active");
       this.toggle($(".menu"), "down", "active");
       this.toggle($(".transition-div-1"), "transition-1-out", "transition-1");
       this.toggle($(".transition-div-2"), "transition-2-out", "transition-2");
       this.toggle($(".transition-div-3"), "transition-3-out", "transition-3");
-      // this.toggle($("#canvas"), "z-index-1", "z-index-0");
-    }
+
+      var element = document.getElementById(e.target.parentElement.dataset.to);
+      if (element) {
+        var top = element.offsetTop;
+        window.scrollTo(0, top);
+      }
+    },
+    activateItem() {
+      $('.navbar-item').hover(
+      function(){
+        $(this).addClass('active')
+      },
+      function(){
+        $(this).removeClass('active')
+      })
+    },
   }
 };
 </script>
@@ -62,6 +105,46 @@ export default {
   position: relative;
 }
 
+.close-menu-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 50px;
+  height: 50px;
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: -1;
+    background: $black;
+    transform: rotate(-11deg);
+  }
+  
+  &:after{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: -1;
+    background: $primary;
+    transform: rotate(11deg);
+  }
+}
+
 .menu {
   position: absolute;
   top: 0;
@@ -74,6 +157,62 @@ export default {
   align-items: center;
   justify-content: flex-start;
   padding: 50px;
+  ul {
+    li {
+      list-style-type: none;
+      text-decoration: none;
+      color: $white;
+      cursor: pointer;
+
+      span {
+        color: $white;
+        font-size: 50px;
+      }
+    }
+  }
+}
+
+.navbar-item {
+  transition: 0.2s linear;
+  position: relative;
+  margin-bottom: 1rem;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $black;
+    transform: rotate(5deg);
+    z-index: -1;
+  }
+  &.active {
+    &:after {
+      content: "";
+      position: absolute;
+      background: $primary;
+      left: -50px;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+      clip-path: polygon(0% 0%, 75% 0, 100% 100%, 15% 100%);
+      animation: wobble 2s infinite;
+    }
+  }
+}
+
+@keyframes wobble {
+  0% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
 }
 
 .menu.active {
@@ -108,7 +247,7 @@ export default {
   animation: gradient-2 2.5s ease 0.15s forwards;
 }
 .transition-3 {
-  border-top: 0 solid $black;
+  border-top: 0 solid $primary;
   animation: gradient 2s ease 0.35s forwards;
 }
 
@@ -123,7 +262,7 @@ export default {
   animation: gradient-out-2 2s ease 0.15s forwards;
 }
 .transition-3-out {
-  border-top: 5000px solid $black;
+  border-top: 5000px solid $primary;
   border-left: 5000px solid transparent;
   animation: gradient-out 2s ease forwards;
 }

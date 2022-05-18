@@ -42,3 +42,8 @@ class Experience(models.Model):
 class Language(models.Model):
     name = models.CharField(max_length=455)
     image = models.ImageField(upload_to=upload_project_img_path)
+
+class AboutMe(models.Model):
+    image = models.ImageField(upload_to=upload_project_img_path)
+    image_shadow = models.ImageField(upload_to=upload_project_img_path)
+    content = HTMLField()

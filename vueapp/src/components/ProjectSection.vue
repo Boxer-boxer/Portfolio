@@ -1,39 +1,43 @@
 <template>
-  <div class="project-section section px-5 px-lg-5 pb-4 mx-0">
-    <div class="black-stroke-right">
-      <div class="sep-title sep-title-out" id="proj-title">
-        <h1 class="wack-style" data-content="Projects"></h1>
+  <section id="section-project">
+    <StrokeTitle title="Projects" orientantion-class="black-stroke-right" sepTitleId="proj-title" containerTitleId="proj-container-title"/>
+
+    <div class="project-section section ">
+      <div class="px-5 px-lg-5 pb-4 mx-0">
+        <div class="row justify-content-end" id="projects-display">
+          <a
+            v-for="project in projects"
+            :key="project.id"
+            :id="`project-${project.id}`"
+            class="pl-lg-1 col-lg-4 col-6 project"
+            href="/"
+          >
+            <div class="shape-1"></div>
+            <div class="shape-2"></div>
+            <img
+              :src="project.images[0].image"
+              :alt="`${project.name} - ${project.subtitle}`"
+              class="project-thumbnail"
+            />
+            <div class="project-overlay d-flex flex-column">
+              <h2 class="project-name mt-4">{{ project.project_name }}</h2>
+              <a href="/" class="project-name">View Project</a>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
-
-    <div class="row justify-content-end" id="projects-display">
-      <a
-        v-for="project in projects"
-        :key="project.id"
-        :id="`project-${project.id}`"
-        class="pl-lg-1 col-lg-4 col-6 project"
-        href="/"
-      >
-        <div class="shape-1"></div>
-        <div class="shape-2"></div>
-        <img
-          :src="project.images[0].image"
-          :alt="`${project.name} - ${project.subtitle}`"
-          class="project-thumbnail"
-        />
-        <div class="project-overlay d-flex flex-column">
-          <h2 class="project-name mt-4">{{ project.project_name }}</h2>
-          <a href="/" class="project-name">View Project</a>
-        </div>
-      </a>
-    </div>
-  </div>
+  </section>
 </template>
 
 <script>
+import StrokeTitle from "./StrokeTitle.vue"
+
 export default {
   name: "ProjectSection",
-  components: {},
+  components: {
+    StrokeTitle,
+  },
   props: {
     projects: {
       type: Array,
@@ -73,7 +77,8 @@ export default {
 
 .project-section {
     position: relative;
-    padding-top: 185px;
+    padding-top: 180px;
+    padding-bottom: 180px;
     background: $primary;
 }
 

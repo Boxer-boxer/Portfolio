@@ -1,14 +1,22 @@
 <template>
   <div class="main" :style="cssVars">
-    <button class="menu-button" v-on:click="openMenu">menu</button>
+    <div class="menu-button-container">
+      <button class="menu-button" v-on:click="openMenu">
+        <div class="menu-icon">
+          <span class="menu-button-bar" id="menu-button-bar-1"></span>
+          <span class="menu-button-bar" id="menu-button-bar-2"></span>
+          <span class="menu-button-bar" id="menu-button-bar-3"></span>
+        </div>
+      </button>
+    </div>
 
     <SideBar />
     <EntrySection />
     <ProjectSection :projects="this.projects" />
     <ExperienceSection :experience="this.experience" :languages="this.languages"/>
-    <AboutMeSection />
+    <AboutMeSection :aboutme="this.aboutme" />
+    <ContactMeSection />
     
-    <div style="height: 100vh"></div>
   </div>
 </template>
 
@@ -18,10 +26,10 @@ import SideBar from "./components/SideBar.vue";
 import EntrySection from "./components/EntrySection.vue";
 import toggle from "./mixins/toggle";
 import $ from "jquery";
-import _ from "underscore";
 import ProjectSection from "./components/ProjectSection.vue";
 import ExperienceSection from "./components/ExperienceSection.vue";
 import AboutMeSection from "./components/AboutMeSection.vue";
+import ContactMeSection from "./components/ContactMeSection.vue";
 
 export default {
   name: "App",
@@ -32,13 +40,15 @@ export default {
     ProjectSection,
     ExperienceSection,
     AboutMeSection,
+    ContactMeSection
   },
   data() {
     return {
       data: "",
       projects: [],
       languages: [],
-      experience: []
+      experience: [],
+      aboutme: {}
     };
   },
   head: {
@@ -53,15 +63,10 @@ export default {
     this.getProjects();
     this.getLanguages();
     this.getExperience();
+    this.getAboutMe();
   },
   mounted(){
     this.createWackStyle();
-    $(window).on('scroll', () => {
-      _.debounce(
-        this.checkElPosition(document.getElementsByClassName('black-stroke'),".sep-title", "sep-title-out"),
-        this.checkElPosition(document.getElementsByClassName('black-stroke-right'),".sep-title", "sep-title-out"),
-        500) 
-    });
   },
   methods: {
     createWackStyle() {
@@ -120,7 +125,6 @@ export default {
     async getExperience(){
       const api_url = new URL(location.href).href;
       await axios.get(`${api_url}api/experience`).then((response) => {
-        console.log(response.data[0])
         this.experience = response.data;
       });
     },
@@ -130,6 +134,12 @@ export default {
         this.languages = response.data;
       });
     },
+    async getAboutMe(){
+      const api_url = new URL(location.href).href;
+      await axios.get(`${api_url}api/aboutme`).then((response) => {
+        this.aboutme = response.data[0];
+      });
+    },
     openMenu() {
       this.toggle($(".menu-main"), "active", "down");
       this.toggle($(".menu"), "active", "down");
@@ -137,22 +147,6 @@ export default {
       this.toggle($(".transition-div-2"), "transition-2", "transition-2-out");
       this.toggle($(".transition-div-3"), "transition-3", "transition-3-out");
     },
-    checkElPosition(elements, target, classOut){
-      [].forEach.call(elements, function (each) {
-        let el = each.querySelector(target);
-        if(el != null) {
-          var rect = el.getBoundingClientRect();
-          let withinView = rect.top >= 0 
-          let out = rect.left >= 0
-
-          if(withinView == false) {
-            el.classList.add(classOut);
-          } else if (withinView && out == false) {
-            setTimeout(() => { el.classList.remove(classOut) }, 500);
-          }
-        }
-      })
-    }
   },
   computed: {
     cssVars() {
@@ -200,6 +194,9 @@ export default {
   &black {
     background: $black;
   }
+  &primary {
+    background: $primary!important;
+  }
 }
 
 .rotate-20deg {
@@ -208,18 +205,6 @@ export default {
 
 .mb-6 {
   margin-bottom: 3.5em;
-}
-
-.black-stroke-right {
-    background: $black;;
-    position: absolute;
-    top: -8%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-    height: 185px;
-    transform: skew(0deg, 7deg);
 }
 
 .negative {
@@ -241,11 +226,51 @@ body {
   overflow-x: hidden;
 }
 
+.menu-icon {
+  transform: rotate(9deg);
+}
+
 .menu-button {
-  right: 15px;
-  top: 15px;
-  position: fixed;
   z-index: 15;
+  padding: 10px;
+  background: $white;
+  border: none;
+  transform: rotate(-9deg);
+  cursor: pointer;
+
+  &-container {
+    right: 1rem;
+    top: 1rem;
+    position: fixed;
+    z-index: 15;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: -5px;
+      bottom: -6px;
+      left: -6px;
+      right: -5px;
+      background: $black;
+      z-index: -1;
+      transform: rotate(11deg);
+    }
+  }
+
+  
+
+  &-bar {
+    border-radius: 10px;
+    width: 40px;
+    height: 5px;
+    background: $primary;
+    margin-bottom: 5px;
+    border: 1px solid $white;
+    display: block;
+    &:nth-last-of-type(1) {
+        margin-bottom: 0;
+      }
+  }
 }
 
 #canvas {
